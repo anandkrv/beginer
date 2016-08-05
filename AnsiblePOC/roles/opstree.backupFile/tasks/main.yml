@@ -1,0 +1,17 @@
+---
+# tasks file for opstree.backupFile
+
+- name: Creates backup file ...
+  command: cp {{ source_file }} {{ backup_file }} 
+
+- name: Creates tar of backup file ...
+  command: tar -cvf {{ backup_dir }}/{{ ansible_hostname }}-{{ ansible_date_time.date }}-backup.tar.gz {{ backup_file }}
+
+- name: Deleting backup file ...
+  command: rm {{ backup_file }}
+
+- name: Unarchive the backup tar
+  unarchive: src={{ backup_dir }}/{{ ansible_hostname }}-{{ ansible_date_time.date }}-backup.tar.gz dest={{ backup_dir }} copy=no
+
+- name: upload in s3 bucket ...
+  command: aws s3 cp {{ backup_dir }}/{{ ansible_hostname }}-{{ ansible_date_time.date }}:{{ ansible_date_time.time }}-backup.tar.gz s3://{{ s3_bucket_name }}

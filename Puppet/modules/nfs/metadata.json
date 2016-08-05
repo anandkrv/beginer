@@ -1,0 +1,37 @@
+{
+  "name": "example42-nfs",
+  "version": "2.0.13",
+  "summary": "Puppet module for nfs",
+  "author": "Alessandro Franceschi",
+  "description": "This module installs and manages nfs. Check README for details.",
+  "dependencies": [
+    {
+      "name": "example42/puppi",
+      "version_requirement": ">=2.0.0"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "LICENSE": "a300b604c66de62cf6e923cca89c9d83",
+    "Modulefile": "f0014c4303b2781cd9c60fb7738f9cbd",
+    "README.md": "d7005f98c44a2f58463226b002078774",
+    "README.rdoc": "c1b2d60a46b3536cfe0d065f5a628954",
+    "Rakefile": "e90d68823ff237c89224eb139f8926ad",
+    "manifests/client.pp": "4f65b932e15777ff5ad3e76cacc9a556",
+    "manifests/init.pp": "d3e6ce3e5b7b9d53c80bcc3f147a402e",
+    "manifests/params.pp": "28853463b1ab42cf15fad331f2f2a939",
+    "manifests/server.pp": "8ce48f5eb959dd6810b8d707f7e012f7",
+    "manifests/spec.pp": "a98963b224f6d4df4a7f0083f16e2cf4",
+    "spec/classes/standard42_spec.rb": "c329d7c691fc93751429fe8e319ae5e1",
+    "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc",
+    "templates/spec.erb": "95554a191230174b3ba5942f8d8d5b1e",
+    "tests/absent.pp": "aea5cc8c3624024ba6d395af6d29943a",
+    "tests/disable.pp": "0bc1a89bbd7a0d77e7456e828a0f70aa",
+    "tests/init.pp": "c140b3cf12b345daaf0e60f735f48efc"
+  },
+  "source": "https://github.com/example42/puppet-nfs",
+  "project_page": "http://www.example42.com",
+  "license": "Apache2"
+}

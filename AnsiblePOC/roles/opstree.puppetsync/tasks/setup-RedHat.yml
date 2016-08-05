@@ -1,0 +1,28 @@
+---
+# tasks file for puppet.sync
+
+- name: Configure hostname ....
+  command: hostname {{ hostname }}
+
+- lineinfile: dest=/etc/hosts line={{ Add_line }}
+
+- name: Install Puppet repo ....
+  get_url: url=https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm dest=/tmp
+
+- name: Extracting puppet ....
+  command: rpm -i /tmp/puppetlabs-release-el-7.noarch.rpm
+
+- name: Install Puppet agent ...
+  yum: "name=puppet state=installed"
+
+- name: Copy auth.conf....
+  template: src=auth.conf dest=/etc/puppet/auth.conf
+
+- name: Copy puppet.conf ....
+  template: src=puppet.conf dest=/etc/puppet/puppet.conf
+
+- name: Enable puppet ....
+  command: puppet agent --enable 
+
+- name: Sync puppet ....
+  command: puppet agent -t --debug

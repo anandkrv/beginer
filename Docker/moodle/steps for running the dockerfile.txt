@@ -1,0 +1,10 @@
+Steps how to build the moodle app through Dockerfile:-
+
+step1:- Execute the below command by going into the directory which contains the Dockerfile:-
+      
+                docker build -t moodle .
+
+Step2:- Open your browser and go to http://IP.ADDRESS.OF.SERVER/moodle
+   
+   Note:- The ip address of server is the ip address of the moodle machine which we have build above
+

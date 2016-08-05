@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# THIS FILE IS MANAGED BY PUPPET, CHANGES WILL BE OVERWRITTEN WITHOUT FURTHER NOTICE
+
+### BEGIN INIT INFO
+# Provides:          <%= @service %>
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop custom Xvfb
+# Description:       Service <%= @service %>
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+DISPLAY=":<%= @display %>"
+WIDTH=<%= @width %>
+HEIGHT=<%= @height %>
+COLOR=<%= @color %>
+
+XVFB=<%= @xvfb_bin %>
+<% if @custom_args -%>
+ARGS="<%= @custom_args %>"
+<% else -%>
+ARGS="$DISPLAY -nolisten tcp -fbdir <%= @fbdir %> -screen 0 ${WIDTH}x${HEIGHT}x${COLOR}"
+<% end -%>
+PIDFILE=/var/run/<%= @service %>.pid
+
+case "$1" in
+  start)
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --chuid <%= @runuser %> --make-pidfile --background --exec $XVFB -- $ARGS
+    ;;
+  stop)
+    start-stop-daemon --stop --quiet --user <%= @runuser %> --pidfile $PIDFILE
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  status)
+    status_of_proc -p $PIDFILE $XVFB <%= @service %> && exit 0 || exit $?
+  ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+    exit 1
+esac
+
+exit 0

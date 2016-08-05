@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# PROVIDE: <%= @service %>
+# REQUIRE: NETWORK
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf to enable <%= @service %>
+#
+# <%= @service %>_enable="YES"
+#
+
+. /etc/rc.subr
+
+name="<%= @service %>"
+rcvar="<%= @service %>_enable"
+
+: ${<%= @service %>_enable="NO"}
+: ${<%= @service %>_rundir="/var/run/<%= @service %>"}
+
+command="<%= @xvfb_bin %>"
+XVFB=<%= @xvfb_bin %>
+<% if @custom_args -%>
+command_args="<%= @custom_args %>"
+<% else -%>
+command_args=":<%= @display %> -nolisten tcp -fbdir <%= @fbdir %> -screen 0 <%= @width %>x<%= @height %>x<%= @color %>"
+<% end -%>
+pidfile="${<%= @service %>_rundir}/<%= @service %>.pid"
+
+start_cmd="xvfb_start"
+
+load_rc_config "$name"
+
+xvfb_start() {
+  echo "Starting <%= @service %>"
+  [ ! -d "${<%= @service %>_rundir}" ] && mkdir -p "${<%= @service %>_rundir}"
+  /usr/sbin/daemon -u <%= @runuser %> -f \
+    -p ${pidfile} \
+    ${command} \
+    ${command_args}
+}
+
+run_rc_command "$1"

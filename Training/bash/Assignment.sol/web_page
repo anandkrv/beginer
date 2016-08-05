@@ -1,0 +1,13 @@
+#!/bin/bash
+#bash script if a web page is available or not
+#II'll take a url  name  as a parameter 
+#when come the 200 webpage is available 
+
+
+webpage="$1"
+echo "webpage=$webpage"
+
+
+curl -sL -w "%{http_code}\\n" $webpage -o /dev/null 
+
+

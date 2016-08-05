@@ -1,0 +1,7 @@
+---
+# defaults file for opstrr.Mybb
+mybb_version: "1806"
+nginx_root_path: "/var/www/html"
+server_name: "mybb.com"
+epel_repo_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+epel_repo_gpg_key_url: "/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"

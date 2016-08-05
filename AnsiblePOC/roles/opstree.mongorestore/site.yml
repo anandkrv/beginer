@@ -1,0 +1,4 @@
+---
+- hosts: restore_hosts 
+  roles:
+    - { role: "opstree.mongorestore" }

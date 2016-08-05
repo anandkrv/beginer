@@ -1,0 +1,15 @@
+#!/bin/bash
+JARNAME=logstash.jar
+LOCATION="/usr/local/logstash"
+CONFIG_DIR=/etc/logstash/conf.d/
+LOGFILE=/var/log/logstash/logstash.log
+JAVAMEMX=256M
+JAVAMEMS=256M
+
+java=$(which java)
+
+
+cd $LOCATION
+
+exec $java -Xmx$JAVAMEMX -Xms$JAVAMEMS -jar ${JARNAME} agent --config ${CONFIG_DIR} --log ${LOGFILE}
+

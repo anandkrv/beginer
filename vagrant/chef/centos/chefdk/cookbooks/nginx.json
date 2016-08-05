@@ -1,0 +1,10 @@
+{
+"nginx": {
+	"webroot": "/usr/share/nginx/blog",
+	"servername": "blog.xebia.com",
+	"conffile": "blog.xebia.com.conf"
+	},
+"run_list": [
+		"recipe[nginx]"
+	]
+}

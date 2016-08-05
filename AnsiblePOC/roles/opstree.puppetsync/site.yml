@@ -1,0 +1,13 @@
+---
+
+- hosts: puppet-node
+  vars:
+    - hostname: drupal
+  roles:
+   - { role: "opstree.puppetsync" }
+
+- hosts: puppet-node2
+  vars:
+    - hostname: drupal23
+  roles:
+   - { role: "opstree.puppetsync" }

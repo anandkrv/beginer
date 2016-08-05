@@ -1,0 +1,4 @@
+---
+- hosts: mySql_hosts
+  roles:
+    - { role: "opstree.MysqlBackupRestorer" }

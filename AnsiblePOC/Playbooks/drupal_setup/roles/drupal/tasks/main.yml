@@ -1,0 +1,29 @@
+---
+
+- name: Install git
+  apt: name=git state=latest
+
+- name: Clone Drupal
+  git: >
+    repo=http://git.drupal.org/project/drupal.git
+    dest=/var/www/html/drupal/
+    update=no
+
+- name: Create settings.php
+  command: cp /var/www/html/drupal/sites/default/default.settings.php /var/www/html/drupal/sites/default/settings.php
+
+- name: Create services.yml
+  command: cp /var/www/html/drupal/sites/default/default.services.yml /var/www/html/drupal/sites/default/services.yml
+
+- name: Update permissions of settings.php
+  file: path=/var/www/html/drupal/sites/default/settings.php mode=777
+
+- name: Update permissions of services.yml
+  file: path=/var/www/html/drupal/sites/default/services.yml mode=777
+
+- name: Update permissions of files directory
+  file: >
+    path=/var/www/html/drupal/sites/default/files
+    mode=777
+    state=directory
+    recurse=yes

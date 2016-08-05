@@ -1,0 +1,19 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "centos7"
+  config.vm.box_url = "https://github.com/holms/vagrant-centos7-box/releases/download/7.1.1503.001/CentOS-7.1.1503-x86_64-netboot.box"
+  #config.vm.network "public_network", bridge:"wlan0"
+
+  config.vm.network "private_network", ip: "192.168.33.15"
+  config.vm.hostname = "chef-resources"
+   config.vm.network "forwarded_port", guest: 8080, host: 8090
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo rpm -ivh /vagrant/chefdk-0.16.28-1.el6.x86_64.rpm
+  SHELL
+end

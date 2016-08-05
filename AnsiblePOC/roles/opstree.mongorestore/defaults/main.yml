@@ -1,0 +1,14 @@
+---
+# defaults file for opstree.mongorestore
+
+mongobackup_dir: "/opt"
+mongobackup_file: "mongo-backup"
+mongo_database_username: "root"
+mongo_database_password: "opstree"
+mongo_database_name: "opstree"
+mongo_collection_name: "opstree"
+password_less_login: "true"
+password_login: "false"
+restore_for_specific_database: "false"
+restore_for_specific_collection: "false"
+

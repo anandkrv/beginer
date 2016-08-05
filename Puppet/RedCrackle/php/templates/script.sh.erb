@@ -1,0 +1,13 @@
+#!/bin/bash
+PHP_VERSION=$1
+apt-get install -y make freetype* libfcgi-dev libfcgi0ldbl libjpeg62-dbg libmcrypt-dev libssl-dev libbz2-dev libjpeg-dev libfreetype6-dev libpng12-dev libxpm-dev libxml2-dev libpcre3-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng12-dev libxpm-dev libfreetype6-dev libmysqlclient-dev libt1-dev libgd2-xpm-dev libgmp-dev libsasl2-dev libmhash-dev unixodbc-dev freetds-dev libpspell-dev libsnmp-dev libtidy-dev libxslt1-dev libmcrypt-dev libdb5.3-dev
+wget -O /var/tmp/php-${PHP_VERSION}.tar.bz2 http://php.net/distributions/php-5.3.29.tar.bz2
+mkdir -p /opt/build
+tar jxf /var/tmp/php-${PHP_VERSION}.tar.bz2 -C /opt/build
+mkdir /usr/include/freetype2/freetype
+ln -s /usr/include/freetype2/freetype.h /usr/include/freetype2/freetype/freetype.h
+cd /opt/build/php-${PHP_VERSION}
+./configure --enable-fpm --with-mcrypt --enable-mbstring --with-openssl --with-mysql --with-mysql-sock --with-gd --with-jpeg-dir=/usr/lib --enable-gd-native-ttf --with-pdo-mysql --with-libxml-dir=/usr/lib --with-mysqli=/usr/bin/mysql_config --with-curl --enable-zip --enable-sockets --with-zlib --enable-exif --enable-ftp --with-iconv --with-gettext --enable-gd-native-ttf --with-t1lib=/usr --with-freetype-dir=/usr --prefix=/opt/PHP-${PHP_VERSION} --with-config-file-path=/opt/PHP-${PHP_VERSION}/etc --with-fpm-user=www-data --with-fpm-group=www-data
+make
+make test
+make install

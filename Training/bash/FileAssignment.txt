@@ -1,0 +1,28 @@
+1.) Create a script to create an empty file.
+2.) Create a script to list out all the files in a directory matching to a pattern.
+3.) Print the top N lines after sorting the content of file in Descending order
+4.) Return the list of all files with name and their size in a directory.
+5.) Return the list of all files with name and their size in a directory with a filter of minimum file size i.e get list of files having size more then 1MB.
+6.) Print the line number's in the file matching a regex.
+7.) Delete a line number from a file.
+8.) Count number of lines in a file.
+9.) Add a line if not already present in the file.
+10.) Add a line below the line number.
+11.) Add a line above the linde number.
+12.) Add a line at the end of file.
+13.) Get the line at a specified line number. i.e. 5th line of file
+14.) Get the word at a specified position and line number i.e 3rd word in 5th line
+15.) Sync the content from source folder to target folder.
+16.) Move a file from source folder to target folder.
+17.) Create a directory.
+18.) Remove a file.
+19.) Remove a directory.
+20.) Check if a file exists or not
+21.) Check if a directory exists
+22.) Process a template file that is replacing a content from another. i.e replace "hi" with "hello".
+23.) Find files older then N days in a directory.
+24.) Delete files older then N days.
+25.) Delete Folder older then N days.
+26.) Search and Replace in Multiple Files
+
+

@@ -1,0 +1,4 @@
+---
+- hosts: backupFile_hosts
+  roles:
+    - { role: "opstree.backupFile" }

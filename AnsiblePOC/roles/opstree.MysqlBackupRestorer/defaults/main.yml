@@ -1,0 +1,8 @@
+---
+# defaults file for opstree.MysqlBackupRestorer
+mySql_backup_file: "/opt/backup3.sql"
+#mySql_userName: "root"
+#mySql_password: "rahul"
+#mySql_databaseName: "opstree"
+#mySql_tableName: "Persons"
+backup_dir: "/opt/"

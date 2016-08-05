@@ -1,0 +1,31 @@
+---
+# tasks file for puppet.sync
+
+- hostname: name={{ hostname }}
+
+- lineinfile: dest=/etc/hosts line={{ Add_line }}
+
+- name: Install Puppet repo ....
+  get_url: url=https://apt.puppetlabs.com/puppetlabs-release-trusty.deb dest=/tmp
+
+- name: Extracting puppet ....
+  command: dpkg -i /tmp/puppetlabs-release-trusty.deb
+
+- name: Update apt cache ...
+  apt: update_cache=yes cache_valid_time=86400
+
+- name: Install Puppet agent ...
+  apt: "name=puppet state=installed"
+
+- name: Copy auth.conf....
+  template: src=auth.conf dest=/etc/puppet/auth.conf
+
+- name: Copy puppet.conf ....
+  template: src=puppet.conf dest=/etc/puppet/puppet.conf
+
+- name: Enable puppet ....
+  command: puppet agent --enable 
+
+- name: Sync puppet ....
+  command: puppet agent -t --debug
+

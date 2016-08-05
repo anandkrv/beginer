@@ -1,0 +1,27 @@
+{
+  "source": "https://github.com/desalvo/puppet-percona",
+  "author": "desalvo",
+  "types": [
+
+  ],
+  "description": "Puppet module for percona XtraDB configuration",
+  "project_page": "https://github.com/desalvo/puppet-percona",
+  "name": "desalvo-percona",
+  "summary": "Puppet module for percona",
+  "version": "0.1.6",
+  "license": "Apache License, Version 2.0",
+  "dependencies": [
+
+  ],
+  "checksums": {
+    "tests/init.pp": "016202a5cec073e93cc95436551e3f5f",
+    "manifests/init.pp": "d4a49ab33103ad254766ad2e591f5267",
+    "templates/my.cnf.erb": "fca835d468ab0db9989f5cdd0001b394",
+    "Modulefile": "1691ca97d58e9064913ab49d4b043b36",
+    "README.md": "c4bc48ce2710c712678427a6099db673",
+    "LICENSE": "d2794c0df5b907fdace235a619d80314",
+    "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+    "manifests/params.pp": "6aa94103f97efad20ca7a50e58fb348b",
+    "templates/percona.list.erb": "94c770c3e9de03cddde832805abffa0f"
+  }
+}

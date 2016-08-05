@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# THIS FILE IS MANAGED BY PUPPET, CHANGES WILL BE OVERWRITTEN WITHOUT FURTHER NOTICE
+
+### BEGIN INIT INFO
+# Provides:          <%= @service %>
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start/stop custom VNC
+# Description:       Service <%= @service %>
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+DISPLAY=":<%= @display %>"
+
+BINARY=<%= @x11vnc_bin %>
+<% if @custom_args -%>
+ARGS="<%= @custom_args %>"
+<% else -%>
+ARGS="-forever -display $DISPLAY"
+<% end -%>
+PIDFILE=/var/run/<%= @service %>.pid
+
+case "$1" in
+  start)
+    start-stop-daemon --start --quiet --pidfile $PIDFILE --chuid <%= @runuser %> --make-pidfile --background --exec $BINARY -- $ARGS
+    ;;
+  stop)
+    start-stop-daemon --stop --quiet --chuid <%= @runuser %> --pidfile $PIDFILE
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  status)
+    status_of_proc -p $PIDFILE $BINARY <%= @service %> && exit 0 || exit $?
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+    exit 1
+esac
+
+exit 0

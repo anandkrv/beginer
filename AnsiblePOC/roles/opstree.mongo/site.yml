@@ -1,0 +1,4 @@
+---
+- hosts: mongo_hosts
+  roles:
+    - { role: "opstree.mongo" }

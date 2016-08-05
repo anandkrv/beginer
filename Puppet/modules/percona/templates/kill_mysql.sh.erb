@@ -1,0 +1,5 @@
+for A in `ps -ef | grep mysql| awk '{print $2 }'`; do
+  kill -9 $A
+done
+sleep 5
+exit 0

@@ -1,0 +1,19 @@
+{
+  "CHANGES.md": "fe54bcda446c10426f345597f56b6f77",
+  "Gemfile": "f69e77520098bf8b6db2b89dc763afcd",
+  "LICENSE": "9dd581c354982fe5a5f889f3f28e753f",
+  "README.md": "e8aa833a330e4624d7f7aa68d33503d9",
+  "Rakefile": "0aa6c6735212e5cf7c5c4dfd3eb2b211",
+  "manifests/config.pp": "29f73668c1804170385a9fdc9f71ad8a",
+  "manifests/init.pp": "d8bb7ab049a3ca0777163fa2fe9bb99c",
+  "manifests/package.pp": "9b5f39865eab2384233eebaa3267b24c",
+  "manifests/params.pp": "fd25d65674f78439daf3239e6bec2ac3",
+  "manifests/service.pp": "069794a6cf5bb38aa0937c1cb41abd99",
+  "metadata.json": "8f6de46788c6e952e6b770dd0cd345e7",
+  "spec/classes/config_spec.rb": "b89b21a7ba597619672608adfc615315",
+  "spec/classes/init_spec.rb": "02093a86915455514a6f04244ac602bc",
+  "spec/classes/package_spec.rb": "d0d4c500969562f2ecc8cb4f1cbc3938",
+  "spec/classes/params_spec.rb": "483e8ea8fc233dcd8cc3c59e22924e7c",
+  "spec/classes/service_spec.rb": "81d10a2cf1ed7f357503d59e7d92c5c3",
+  "spec/spec_helper.rb": "ced942329356834db7466f0250ddb4f1"
+}

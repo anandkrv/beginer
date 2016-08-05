@@ -1,0 +1,46 @@
+{
+  "checksums": {
+    "manifests/output/redis.pp": "3c7d1554d426aacf7c93856930d0c04d",
+    "manifests/output/mosquitto.pp": "16475e50771db5478cc55d82755156e0",
+    "manifests/output/sqs.pp": "7ef711495e32eddf21dfeb7e417696a2",
+    "files/etc/init.d/beaver.RedHat": "30a1a47f3a41c07af33b1ad39217fb28",
+    "manifests/service.pp": "efd202a054912c8a761c18b4dd9d353b",
+    "Rakefile": "4617b1db6b164cda36fa92014ffa4950",
+    "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+    "manifests/init.pp": "34edcadae134da935c04488b6b393c16",
+    "README.md": "ae03c2fed5d8d1c2944506998a9a1ba2",
+    "CHANGELOG": "60db2c68b976d73beef1d67706ec1a16",
+    "Modulefile": "3b3628e1004e7d47aca5440e7b78cfa7",
+    "manifests/config.pp": "58e0faf6ad04bef6eb3f9f4710990122",
+    "spec/classes/beaver_init_spec.rb": "ea0121b6335a904cd9ad3703c650ad7e",
+    "CONTRIBUTORS": "b73ac92456de523395e8f580bec687db",
+    "manifests/package.pp": "fd651bdf0976c7aeb7b80ccb98c3ad15",
+    "files/etc/init.d/beaver.Debian": "52e9cfdf52b72322398ad362e2b8424f",
+    "manifests/params.pp": "2ede2d9e6659c1b9fd819ef05c0f30ae",
+    "manifests/input/file.pp": "b637bb5f1d51f5c0b3c7d81388ca4785",
+    "manifests/output/rabbitmq.pp": "b813d1cbbb5c96212e2ded672ce5656b",
+    "manifests/output/zeromq.pp": "8b155ab20fa16cb4d713ee77eae6a802",
+    "manifests/output/udp.pp": "669f3c6b7137ee8e42835815bb5b0184"
+  },
+  "license": "Apache License, Version 2.0",
+  "source": "https://github.com/electrical/puppet-beaver",
+  "types": [
+
+  ],
+  "description": "Module for managing and configuring beaver",
+  "version": "0.0.3",
+  "summary": "Module for managing and configuring beaver",
+  "name": "ispavailability-beaver",
+  "project_page": "https://github.com/electrical/puppet-beaver",
+  "author": "ispavailability",
+  "dependencies": [
+    {
+      "version_requirement": ">= 3.0.0",
+      "name": "puppetlabs/stdlib"
+    },
+    {
+      "version_requirement": ">= 0.0.1",
+      "name": "ispavailability/file_concat"
+    }
+  ]
+}

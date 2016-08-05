@@ -1,0 +1,29 @@
+[MYSQLD] #This section is for mysql configuration
+user = mysql                                                   
+default_storage_engine = InnoDB                  
+basedir = /usr
+datadir = /var/lib/mysql
+socket = /var/run/mysqld/mysqld.sock
+port = 3306
+innodb_autoinc_lock_mode = 2
+log_queries_not_using_indexes = 1
+max_allowed_packet = 128M
+binlog_format = ROW
+wsrep_provider = /usr/lib/libgalera_smm.so
+wsrep_node_address = <%= @wsrep_node_address %> 
+wsrep_cluster_name= <%= @wsrep_cluster_name %>
+wsrep_cluster_address = gcomm://<%= @wsrep_cluster_address %>
+wsrep_node_name = <%= @wsrep_node_name %>
+wsrep_slave_threads = <%= @wsrep_slave_threads %>
+wsrep_sst_method = <%= @wsrep_sst_method %>
+wsrep_sst_auth = <%= @wsrep_sst_auth %>
+
+[sst] #This section is for sst(state snapshot transfer) configuration 
+streamfmt = xbstream
+
+[xtrabackup] #This section is defines tuning configuration for xtrabackup
+compress
+compact
+parallel = 2
+compress_threads = 2
+rebuild_threads = 2

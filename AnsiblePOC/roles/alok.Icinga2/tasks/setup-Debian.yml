@@ -1,0 +1,37 @@
+---
+
+- name: Add icinga apt repository.
+  apt_repository: 
+   repo: 'ppa:formorer/icinga'
+   state: present
+   update_cache: yes
+
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=86400
+
+- name: Install icinga packages.
+  apt: name={{item}} state=installed
+  with_items:
+  - icinga2
+  - icinga2-classicui
+ 
+- copy: src=/etc/ansible/roles/alok.Icinga2/files/htpasswd.users dest=/etc/icinga2-classicui/htpasswd.users owner=root group=www-data mode=0640
+- include: /etc/ansible/roles/radamanth.mysql-ansible/tasks/main.yml 
+
+- name: install ido-mysql.
+  apt: pkg=icinga2-ido-mysql state=installed
+
+- name: Create the database.
+  mysql_db: db={{ db_name }} state=present
+
+- name: Import tables.
+  mysql_db: name={{ db_name }} state=import target=/usr/share/icinga2-ido-mysql/schema/mysql.sql
+
+- name: Restart the MySQL service.
+  service: name=mysql state=restarted
+
+- name: Restart Icinga
+  service: name=icinga2 state=restarted
+
+- name: Icinga username/password icingaadmin/alok.
+  command: echo "icingaadmin/alok"

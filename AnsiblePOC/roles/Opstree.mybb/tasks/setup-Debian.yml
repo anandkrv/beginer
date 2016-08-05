@@ -1,0 +1,42 @@
+---
+#install and configure mybb setup
+
+- name: Update apt cache...
+  apt: update_cache=yes cache_valid_time=86400
+
+- name: Install php5/nginx packages ...
+  apt: name={{item}} state=installed
+  with_items:
+  - php5-mysql
+  - nginx
+  - php5-fpm
+  - unzip
+
+- name: Creates directory ...
+  file: path={{ nginx_root_path }} state=directory
+
+- name: Download Mybb package ...
+  get_url: url=http://resources.mybb.com/downloads/mybb_{{ mybb_version }}.zip dest=/tmp
+
+- name: Unzip mybb package ... 
+  unarchive: src=/tmp/mybb_{{ mybb_version }}.zip dest={{ nginx_root_path }} copy=no
+
+- name: Move Uplaod directory ...
+  command: cp -a /var/www/html/Upload/ {{ nginx_root_path }}/mybb
+
+- name: Configure nginx defaults ...
+  template: src=default dest=/etc/nginx/sites-available/default
+
+- name: Move config.php file  ...
+  command: cp {{ nginx_root_path }}/mybb/inc/config.default.php {{ nginx_root_path }}/mybb/inc/config.php
+
+- file: src=/etc/nginx/sites-available/default dest=/etc/nginx/sites-enabled/default state=link
+
+- name: Change directory ownership  ...
+  command: chown -R www-data:www-data {{ nginx_root_path }}/mybb
+
+- name: Restart the nginx service ...
+  service: name=nginx state=restarted
+
+- name: Restart the Php-fpm service ...
+  service: name=php5-fpm state=restarted

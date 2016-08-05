@@ -1,0 +1,29 @@
+-----------------------------------------------------------------------------------------------
+Steps for initializing the container:-
+
+1)To create the image from the Dockerfile:-
+       docker build -t sandeep/mysql .
+
+2)To run the image and bind to port 3306:-
+        docker run -d -p 3306:3306 sandeep/mysql
+
+Note:- The mysql user is admin and password is admin and is hardcoded in the Dockerfile
+
+3)Connecting to the mysql server of the container so far created from the host machine:-
+       mysql -uadmin -padmin -h127.0.0.1 -P3306
+
+
+------------------------------------------------------------------------------------------------
+Mounting the database file volume from the container to the host machine:-
+
+1)In order to persist the database data, we can mount the database folder of the host on the container to store the database files.
+       docker run -d -v /var/lib/mysql:/var/lib/mysql sandeep/mysql
+
+(This will mount the data base folder of the host /var/lib/mysql inside the docker in /var/lib/mysql ,where MySQL will store the database files by default)
+
+2)After this we can start our mysql image but this time using /var/lib/mysql folder located at the host machine of the mysql server as the database folder:
+        docker run -d -p 3306:3306 -v /var/lib/mysql:/var/lib/mysql sandeep/mysql
+
+3) Then again connect to the mysql server of the container, this time the database folder will be served from the host mysql server
+        mysql -uadmin -padmin -h127.0.0.1 -P3306
+

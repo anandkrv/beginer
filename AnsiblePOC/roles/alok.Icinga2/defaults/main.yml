@@ -1,0 +1,4 @@
+---
+# vars file for mysql-ansible
+mysql_root_passwd: "alok"
+db_name: "alok"

@@ -1,0 +1,22 @@
+#!/bin/bash
+mysqlcheck() {
+DB_HOST=$1
+USERNAME=$2
+PASSWORD=$3
+DB_NAME=$4
+echo 'Checking, if the database is empty or not.';
+count="select count(*) from information_schema.tables where table_type = 'BASE TABLE' and table_schema = '${DB_NAME}'"
+mysql -h ${DB_HOST} -u${USERNAME} -p${PASSWORD} ${DB_NAME} -e "$count" > /tmp/mysql_status.txt 
+stat=`cat /tmp/mysql_status.txt | tail -1`
+rm -rf /tmp/mysql_status.txt
+if [ "$stat" != "0" ]; then
+  echo "Database not empty"
+  echo "0"
+  return 0
+else
+  echo "Database empty"
+  echo "1"
+  return 1
+fi
+}
+mysqlcheck $1 $2 $3 $4

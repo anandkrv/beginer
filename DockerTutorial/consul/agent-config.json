@@ -1,0 +1,10 @@
+{
+"datacenter" : "dc1",
+"data_dir" : "/tmp/consul",
+"log_level" : "INFO",
+"node_name" : "<node-name>",
+"server" : false,
+"bind_addr" : "<container ip>",
+"start_join" : ["<first server ip>"]
+}
+

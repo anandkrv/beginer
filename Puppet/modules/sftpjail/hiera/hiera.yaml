@@ -1,0 +1,16 @@
+---
+:backends:
+  - yaml
+
+:yaml:
+  :datadir: /etc/puppet/hieradata
+
+:hierarchy:
+#  - "%{::clientcert}/common"
+#  - "host/%{hostname}/common"
+  - common
+  - global
+
+:merge_behavior:
+
+ - deeper

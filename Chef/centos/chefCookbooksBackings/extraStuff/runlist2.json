@@ -1,0 +1,21 @@
+{
+   "nginx": {
+      "vhost": {
+        "vhost1": {
+          "webroot": "/usr/share/nginx/chef",
+              "servername": "chef.opstree.com",
+              "conffile": "chef.opstree.com.conf"
+              },
+         "vhost2": {
+           "webroot": "/usr/share/nginx/test",
+              "servername": "test.opstree.com",
+              "conffile": "test.opstree.com.conf"
+              }
+            }
+	  },
+   "run_list": [
+		"recipe[yum-epel]",
+		"recipe[nginxVhostExtended]",
+       		"recipe[nginxVhostExtended::vhost]"
+               ]
+}

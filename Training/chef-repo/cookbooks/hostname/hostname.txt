@@ -1,0 +1,18 @@
+Cookbook:hostname
+  Sets hostname and Fully Qualified Domain Name of the node.
+1.Dependency:- It depends on the hostsfile cookbook so be sure to upload hostsfile before uploading the hostname file.
+
+2.Attributes:-
+     node['set_fqdn'] -- FQDN to set
+     node['hostname_cookbook']['hostsfile_ip'] -- IP used in /etc/hosts to correctly set FQDN (default: 127.0.1.1)
+
+3.Recipes:-
+     a)hostname::default -- will set node's FQDN to value of set_fqdn attribute, and hostname to its host part.
+     b)hostname::vmware -- sets hostname automatically using vmtoolsd. We do not need to set node["set_fqdn"] attributes.
+
+3.Usage:- a)We can configure the set_fqdn attributes in the base role by this way.
+            default_attributes :set_fqdn => 'sandeep-opstree.com'
+            
+          b)Or we can also configure the attributes directly by editing the default.rb file of the Attributes directory like this way:-
+             default['hostname_cookbook']['hostsfile_ip'] = '127.0.1.1'
+           

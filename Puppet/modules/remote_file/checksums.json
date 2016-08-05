@@ -1,0 +1,9 @@
+{
+  "LICENSE": "6089b6bd1f0d807edb8bdfd76da0b038",
+  "README.md": "81667e1a178ddc7b0ba59c2cf86bec66",
+  "lib/puppet/provider/remote_file/ruby.rb": "b3a7df106f2b53580110a3ad9c2ed36d",
+  "lib/puppet/provider/remote_file.rb": "ac75b3d428873d435e06d03fabcf0ab1",
+  "lib/puppet/type/remote_file.rb": "f68e0896a514913a94f6244168efc6a6",
+  "metadata.json": "d80825ab9c43d82af67c49ad488e2a45",
+  "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372"
+}

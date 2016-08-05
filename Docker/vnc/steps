@@ -1,0 +1,11 @@
+1)To build the container from the Dockderfile:--
+
+      docker build -t sandeep/vnc .
+
+2)To run the container sandeep/vnc:-
+
+      sudo docker run -it --rm -p 5901:5901 sandeep/vnc
+
+3)Connecting to the container from the vnc client:--
+
+      Connect to vnc://<host>:5901 via your VNC client. currently the password is hardcoded to “acoman”

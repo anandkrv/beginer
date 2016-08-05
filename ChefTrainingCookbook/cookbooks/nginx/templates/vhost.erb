@@ -1,0 +1,12 @@
+  server {
+      listen 80;
+
+      root /usr/share/nginx/<%= node['nginx']['server'] %>;
+      index index.html index.htm;
+
+      server_name <%= node['nginx']['server'] %>.opstree.com www.<%= node['nginx']['server'] %>.opstree.com;
+
+      location / {
+          try_files $uri $uri/ =404;
+      }
+  }

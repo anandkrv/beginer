@@ -1,0 +1,4 @@
+Create a shell script that can be used to clean the files matching to a specific patter in a specific folder. This script should take below parameters
+1.) Folder from where files to be deleted
+2.) File pattern to be deleted
+3.) Files to be retained

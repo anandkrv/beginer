@@ -1,0 +1,5 @@
+---
+- name: Install elinks
+  apt: name=elinks state=latest
+
+

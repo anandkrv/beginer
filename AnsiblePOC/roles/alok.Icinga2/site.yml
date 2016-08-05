@@ -1,0 +1,4 @@
+---
+- hosts: icinga
+  roles:
+    - { role: "alok.Icinga2" }

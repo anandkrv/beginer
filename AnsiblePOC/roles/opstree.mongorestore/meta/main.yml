@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: sandeep
+  description: Quick and easy mongodb restore.
+  company: Opstree
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - trusty
+    - vivid
+  galaxy_tags:
+    - mongo
+

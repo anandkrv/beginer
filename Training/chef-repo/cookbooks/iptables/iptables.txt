@@ -1,0 +1,41 @@
+Cookbook:iptables
+
+Sets up iptables to use a script to maintain firewall rules.
+
+1.Requirements:
+   Platform:
+           Ubuntu/Debian
+           RHEL/CentOS
+
+2.Recipes:default
+    The default recipe will install iptables and provides a ruby script (installed in /usr/sbin/rebuild-iptables) to manage rebuilding firewall 
+    rules from files dropped off in /etc/iptables.d.
+
+3.Definitions:
+   i)iptables_rule:-
+       This definition drops off a template in /etc/iptables.d after the name parameter. The rule will get added to the local system firewall 
+       through notifying the rebuild-iptables.
+
+4.Attributes:
+    default["iptables"]["install_rules"] = true  # install the default rules and this value is true by default
+
+5.Usage:
+   Examples: To enable port 80, e.g. in an httpd cookbook, create the following template inside the default folder of the template directory 
+             and name it http.erb. Here is the iptable rule of the http.erb file:-
+               
+                    -A FWR -p tcp -m tcp --dport 80 -j ACCEPT
+          
+             Then to use this rule add a line like this in the default recipe of the httpd cookbook
+
+                     iptables_rule "http"
+
+
+
+
+
+
+
+
+
+
+          

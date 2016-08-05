@@ -1,0 +1,6 @@
+---
+# defaults file for opstree.backupFile
+source_file: "/tmp/backup"
+backup_file: "/opt/backup.sql"
+backup_dir: "/opt/"
+#s3_bucket_name: ""

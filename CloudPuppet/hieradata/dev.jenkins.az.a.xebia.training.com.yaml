@@ -1,0 +1,70 @@
+---
+classes:
+  - java
+  - jenkins
+  - nexus
+  - ssh::jenkins
+  - pip
+  - beaver
+  - beaver::input::beaver_files
+  - beaver::input::redis_out
+  - display
+
+beaver::status: enabled
+beaver_files:
+  "syslog":
+    file: '/var/log/messages'
+    type: 'syslog'
+  "jenkins":
+    file: '/var/log/jenkins'
+    type: 'jenkins'
+redis_out:
+  'redisout':
+    host: 'dev.logserver.az.a.xebia.training.com'
+    port: '6379'
+display::display: 99
+display::width: 1024
+display::height: 768
+
+java::distribution: "jdk"
+nexus::revision: '01'
+nexus::version: '2.11.4'
+nexus::nexus_context: ""
+nexus::nexus_root:  "/opt"
+jenkins::install_java: false,
+jenkins::version: '1.651.1-1.1'
+jenkins::lts: true
+jenkins::configure_firewall: false
+jenkins::executors: 3
+jenkins::plugin_hash: 
+  'github': {}
+  'git':  {}
+  'junit': {}
+  'cucumber-reports': {}
+  'parameterized-trigger': {}
+  'conditional-buildstep': {}
+  'htmlpublisher':  {}
+  'promoted-builds':  {}
+  'maven-plugin':  
+    manage_config: true
+    config_filename: 'hudson.tasks.Maven.xml'
+    config_content: template('jenkins/config/plugin/hudson.tasks.Maven.xml.erb')
+  'sonar'
+    manage_config: true
+    config_filename: 'hudson.plugins.sonar.SonarGlobalConfiguration.xml'
+    config_content: template('jenkins/config/plugin/hudson.plugins.sonar.SonarGlobalConfiguration.xml.erb')
+  'xvfb'
+    manage_config: true
+    config_filename: 'org.jenkinsci.plugins.xvfb.Xvfb.xml'
+    config_content: template('jenkins/config/plugin/org.jenkinsci.plugins.xvfb.Xvfb.xml.erb')
+  'job_hash'
+    'Deploy job':
+      config: template("jenkins/config/jobs/OrclCiCdPOC_Deployment.xml.erb")
+    'Junit Test': 
+      config: template("jenkins/config/jobs/OrclCiCdPOC_Junit.xml.erb")
+    'Release Jobs': 
+      config: template("jenkins/config/jobs/OrclCiCdPOC_Release.xml.erb")
+    'Selenium Test':
+      config: template("jenkins/config/jobs/OrclCiCdPOC_Selenium.xml.erb")
+    'Code Quality Test (Sonar)':     
+      config: template("jenkins/config/jobs/OrclCiCdPOC_Sonar.xml.erb")

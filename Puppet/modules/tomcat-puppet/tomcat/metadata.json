@@ -1,0 +1,43 @@
+{
+  "name": "camptocamp-tomcat",
+  "version": "0.15.0",
+  "author": "Camptocamp",
+  "summary": "Puppet Tomcat Module",
+  "license": "Apache-2.0",
+  "source": "https://github.com/camptocamp/puppet-tomcat",
+  "project_page": "https://github.com/camptocamp/puppet-tomcat",
+  "issues_url": "https://github.com/camptocamp/puppet-tomcat/issues",
+  "dependencies": [
+    {"name":"herculesteam/augeasproviders_core","version_requirement":">=2.0.0 <3.0.0"},
+    {"name":"herculesteam/augeasproviders_shellvar","version_requirement":">=2.0.0 <3.0.0"},
+    {"name":"camptocamp/archive","version_requirement":">=0.3.0 <2.0.0"},
+    {"name":"puppetlabs/concat","version_requirement":">=1.0.0 <2.0.0"},
+    {"name":"puppetlabs/inifile","version_requirement":">=1.0.0 <2.0.0"},
+    {"name":"puppetlabs/stdlib","version_requirement":">=4.0.0 <5.0.0"},
+    {"name":"camptocamp/systemd","version_requirement":">=0.1.5 <2.0.0"}
+  ],
+  "description": "Tomcat Module for Puppet",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+---
+user_pass: 
+  - 'saurabh4:1234'
+  - 'saurabh5:12345'
+
+homedir:
+ - /outgoing

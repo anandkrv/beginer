@@ -1,0 +1,45 @@
+Cookbook:sudo
+  The Chef sudo cookbook installs the sudo package and configures the /etc/sudoers file.
+
+1.Requirements:-
+   The platform has a package named sudo and the sudoers file is /etc/sudoers.
+
+2.Attributes:-
+    node['authorization']['sudo']['groups'] - groups to enable sudo access (default: [ "sysadmin" ])
+    node['authorization']['sudo']['users'] - users to enable sudo access (default: [])
+    node['authorization']['sudo']['passwordless'] - use passwordless sudo (default: false)
+    node['authorization']['sudo']['include_sudoers_d'] - include and manage /etc/sudoers.d (default: false)
+    node['authorization']['sudo']['agent_forwarding'] - preserve SSH_AUTH_SOCK when sudoing (default: false)
+    node['authorization']['sudo']['sudoers_defaults'] - Array of Defaults entries to configure in /etc/sudoers
+
+3. Usage:-
+    a)To use attributes for defining sudoers, set the attributes above on the node (or role) itself like this:-
+                  {
+  "default_attributes": {
+    "authorization": {
+      "sudo": {
+        "groups": ["admin", "wheel", "sysadmin"],
+        "users": ["sandeep", "zukin"],
+        "passwordless": "true"
+      }
+    }
+  }
+}
+
+    b)To set attributes on the role itself:-
+           # roles/example.rb
+  default_attributes(
+    "authorization" => {
+       "sudo" => {
+         "groups" => ["admin", "wheel", "sysadmin"],
+         "users" => ["sandeep", "zukin"],
+         "passwordless" => true
+    }
+  }
+) 
+  
+                                         
+                                                
+
+                    
+                                           

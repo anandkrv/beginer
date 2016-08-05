@@ -1,0 +1,105 @@
+# == Class: php
+#
+# Full description of class php here.
+#
+# === Parameters
+#
+# Document parameters here.
+#
+# [*sample_parameter*]
+#   Explanation of what this parameter affects and what it defaults to.
+#   e.g. "Specify one or more upstream ntp servers as an array."
+#
+# === Variables
+#
+# Here you should define a list of variables that this module would require.
+#
+# [*sample_variable*]
+#   Explanation of how this variable affects the funtion of this class and if
+#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
+#   External Node Classifier as a comma separated list of hostnames." (Note,
+#   global variables should be avoided in favor of class parameters as
+#   of Puppet 2.6.)
+#
+# === Examples
+#
+#  class { 'php':
+#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#  }
+#
+# === Authors
+#
+# Author Name <author@domain.com>
+#
+# === Copyright
+#
+# Copyright 2015 Your name here, unless otherwise noted.
+#
+class php($PHP_VERSION="5.3.29"){
+              Exec {
+                path => [
+                        '/usr/local/bin',
+                        '/opt/local/bin',
+                        '/usr/bin',
+                        '/usr/sbin',
+                        '/bin',
+                        '/sbin'],
+                        logoutput => true
+        }
+
+         $req_packages = [ "libfcgi-dev", "libfcgi0ldbl", "libjpeg62-dbg", "libmcrypt-dev", "libssl-dev", "libjpeg-dev", "libfreetype6-dev", "libxpm-dev", "libxml2-dev", "libpcre3-dev", "libbz2-dev", "libcurl4-openssl-dev", "libpng12-dev", "libmysqlclient-dev", "libt1-dev", "libgd2-xpm-dev", "libgmp-dev", "libsasl2-dev", "libmhash-dev", "unixodbc-dev", "freetds-dev", "libpspell-dev", "libsnmp-dev", "libtidy-dev", "libxslt1-dev", "libdb5.3-dev" ]
+
+        package {$req_packages:
+        ensure => "installed"
+        }
+
+       exec { "download_php":
+       command   => "wget -O /var/tmp/php-${PHP_VERSION}.tar.bz2 http://php.net/distributions/php-${PHP_VERSION}.tar.bz2;mkdir -p /opt/build;tar jxf /var/tmp/php-${PHP_VERSION}.tar.bz2 -C /opt/build;",
+	creates => "/opt/build/php-${PHP_VERSION}/",
+       logoutput => true,
+       timeout   => 1800
+        }
+
+       exec { "install_php":
+	require => Exec['download_php'],
+	cwd	=> "/opt/build/php-${PHP_VERSION}",
+       command  => "bash configure --enable-fpm --with-mcrypt --enable-mbstring --with-openssl --with-mysql --with-mysql-sock --with-gd --with-jpeg-dir=/usr/lib --enable-gd-native-ttf --with-pdo-mysql --with-libxml-dir=/usr/lib --with-mysqli=/usr/bin/mysql_config --with-curl --enable-zip  --enable-sockets --with-zlib --enable-exif --enable-ftp --with-iconv --with-gettext --enable-gd-native-ttf --with-t1lib=/usr --with-freetype-dir=/usr --prefix=/opt/PHP-5.3 --with-config-file-path=/opt/PHP-5.3/etc --with-fpm-user=www-data --with-fpm-group=www-data;make;make test;make install",
+       timeout   => 2400
+}
+
+	file { "/opt/PHP-5.3/etc/php.ini":
+		require => Exec['install_php'],
+		source => '/etc/puppet/modules/php/templates/php.ini.erb',
+		owner => 'root',
+		group => 'root',
+		mode => '644',
+	} 
+
+	file { "/opt/PHP-5.3/etc/php-fpm.conf":
+                require => File['/opt/PHP-5.3/etc/php.ini'],
+                source => '/etc/puppet/modules/php/templates/php-fpm.conf.erb',
+                owner => 'root',
+                group => 'root',
+                mode => '644',
+        }
+
+	exec {"install_m4":
+		require => File['/opt/PHP-5.3/etc/php-fpm.conf'],
+		cwd => "/opt/build",
+		command => "wget -O m4-1.4.9.tar.gz http://ftp.gnu.org/gnu/m4/m4-1.4.9.tar.gz;tar -zvxf m4-1.4.9.tar.gz;cd m4-1.4.9;bash configure;make;make install",
+		creates => "/opt/build/m4-1.4.9/"
+	}
+
+	exec {"install_autoconf":
+		require => Exec['install_m4'],
+		cwd=> "/opt/build",
+		command => "curl http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz > autoconf.tar.gz;tar -xvzf autoconf.tar.gz;cd autoconf-2.69;bash configure;sudo make && sudo make install;export PHP_AUTOCONF=/usr/local/bin/autoconf",
+		creates => "/opt/build/autoconf-2.69/"
+	}
+	
+	exec { "install_apc":
+	    require => Exec['install_autoconf'],
+	    cwd => "/opt/PHP-5.3/bin",
+	    command => "bash pecl install apc",
+	}
+}

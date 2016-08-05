@@ -1,0 +1,15 @@
+---
+classes:
+  - timezone
+  - ntp
+  - zabbix::agent
+
+zabbix::agent::server: "dev.zabbix.az.b.xebia.training.com"
+zabbix::agent::serveractive: "dev.zabbix.az.b.xebia.training.com"
+
+timezone::timezone: 'Asia/Kolkata'
+ulimit::use_default_ulimits: false
+ntp::logfile: /var/log/ntp.log
+ntp::minpoll: 10
+ntp::maxpoll: 3
+ntp::iburst_enable: true

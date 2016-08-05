@@ -1,0 +1,60 @@
+# Managed by puppet - do not modify
+#
+# Redis configuration
+daemonize yes
+pidfile /var/run/redis/redis.pid
+port <%= scope.lookupvar('redis::config::port') %>
+bind <%= scope.lookupvar('redis::config::listen') %>
+<% if scope.lookupvar('unixsocket') != '' -%>
+unixsocket <%= scope.lookupvar('unixsocket') %>
+unixsocketperm 755
+<% end -%>
+timeout 0
+loglevel <%= scope.lookupvar('redis::config::redis_loglevel') %>
+logfile /var/log/redis/redis.log
+# syslog-enabled no
+# syslog-ident redis
+# syslog-facility local0
+databases <%= scope.lookupvar('redis::config::databases') %>
+
+# Snapshotting
+<% scope.lookupvar('redis::config::save').each do |snapshot| -%>
+save <%= snapshot %>
+<% end -%>
+rdbcompression yes
+dir /var/lib/redis/
+dbfilename dump.rdb
+
+# Replication
+<% if scope.lookupvar('redis::config::masterip') != '' -%>
+slaveof <%= scope.lookupvar('redis::config::masterip') %> <%= scope.lookupvar('redis::config::masterport') %>
+<%    if scope.lookupvar('redis::config::masterauth') -%>
+masterauth <%= scope.lookupvar('redis::config::masterauth') %>
+<%    end -%>
+slave-serve-stale-data yes
+repl-ping-slave-period 10
+repl-timeout 60
+<% end -%>
+
+# Security
+<% if scope.lookupvar('redis::config::requirepass') != '' -%>
+requirepass <%= scope.lookupvar('redis::config::requirepass') %>
+<% end -%>
+
+#Limits
+maxclients <%= scope.lookupvar('redis::config::maxclients') %>
+<% if scope.lookupvar('redis::config::maxmemory') != '' -%>
+maxmemory <%= scope.lookupvar('redis::config::maxmemory') %>
+<% end -%>
+maxmemory-policy <%= scope.lookupvar('redis::config::maxmemory_policy') %>
+
+# Append only mode
+appendonly <%= scope.lookupvar('redis::config::appendonly') %>
+appendfsync <%= scope.lookupvar('redis::config::appendfsync') %>
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage <%= scope.lookupvar('redis::config::auto_aof_rewrite_percentage') %>
+auto-aof-rewrite-min-size <%= scope.lookupvar('redis::config::auto_aof_rewrite_min_size') %>
+
+# Slow log
+slowlog-log-slower-than <%= scope.lookupvar('redis::config::slowlog_log_slower_than') %>
+slowlog-max-len <%= scope.lookupvar('redis::config::slowlog_max_len') %>

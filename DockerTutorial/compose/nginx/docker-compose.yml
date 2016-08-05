@@ -1,0 +1,12 @@
+nginx1:
+    build: .
+    container_name: "nginx1"
+
+nginx2:
+    build: .
+    container_name: "nginx2"
+
+nginx3:
+    build: .
+    container_name: "nginx3"
+

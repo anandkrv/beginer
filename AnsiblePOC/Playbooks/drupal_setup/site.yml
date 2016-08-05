@@ -1,0 +1,16 @@
+---
+
+- hosts: drupal_hosts
+
+  sudo: yes
+
+  vars:
+    - db_name: drupal
+    - db_user: drupal_user
+    - db_password: drupal_db_pass
+
+  roles:
+    - update
+    - php
+    - mysql
+    - drupal

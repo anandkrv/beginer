@@ -1,0 +1,20 @@
+mysqlcontainer:
+  build: /root/git/DockerTutorial/spring3app/mysql/.
+  volumes:
+    - /tmp/mysql:/var/lib/mysql
+    - /tmp/logs/mysqld.log:/var/log/mysqld.log
+
+mytom:
+  image: tomcat:7.0
+  volumes:
+    - /tmp/webapps:/usr/local/tomcat/webapps
+    - /tmp/tomcat-log/:/usr/local/tomcat/logs
+  links:
+    - mysqlcontainer
+  
+nginx:
+  build: /root/git/DockerTutorial/spring3app/nginx/.
+  ports:
+   - "80:80"
+  links:
+   - mytom

@@ -1,0 +1,31 @@
+{
+  "name": "example42-redis",
+  "version": "2.0.8",
+  "summary": "Puppet module for redis",
+  "author": "Alessandro Franceschi",
+  "description": "This module installs and manages redis. Check README.rdoc for details. Puppi is required for some common functions: you can install them without using the whole module. Monitor and firewall dependencies are needed only if the relevant features are enabled",
+  "dependencies": [
+    {
+      "name": "example42/puppi",
+      "version_requirement": ">=2.0.0"
+    }
+  ],
+  "types": [
+
+  ],
+  "checksums": {
+    "LICENSE": "a300b604c66de62cf6e923cca89c9d83",
+    "Modulefile": "d90456cc3fe2fd5a4e5fe58bc9709f6b",
+    "README.md": "fe32add87403014fee4fee5e4d6ec68d",
+    "Rakefile": "e90d68823ff237c89224eb139f8926ad",
+    "manifests/init.pp": "9f18c5040b203db2c5a6df633a5caa93",
+    "manifests/params.pp": "212630ac4807c358b800867e45e464ca",
+    "manifests/spec.pp": "8d9d7a68669023dd91475994a9fc5695",
+    "spec/classes/redis_spec.rb": "d86d9fdc7ea0b46a04f9e7ff223e5464",
+    "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc",
+    "templates/spec.erb": "95554a191230174b3ba5942f8d8d5b1e"
+  },
+  "source": "https://github.com/example42/puppet-redis",
+  "project_page": "http://www.example42.com",
+  "license": "Apache2"
+}

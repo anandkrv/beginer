@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: alok
+  description: Quick and easy puppet agent installer and sync the puppet master.
+  company: Opstree
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: EL
+    versions:
+    - all
+  - name: Centos
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  galaxy_tags:
+    - puppet

@@ -1,0 +1,6 @@
+.vagrant
+chefdk-0.10.0-1.el6.x86_64.rpm
+epel-release-6-8.noarch.rpm
+.kitchen
+chefignore
+*.deb

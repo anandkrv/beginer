@@ -1,0 +1,12 @@
+20150319 - v1.3.1
+  Modernize module
+20130923 v1.3.0
+  Remove monitoring from module
+  Remove requirement of evenup/ruby
+v1.2.0:
+  Remove hiera dependency
+  Update sensu dependency
+v1.1.4:
+  Add sensu monitoring
+v1.1.3:
+  Initial public release

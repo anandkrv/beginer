@@ -1,0 +1,12 @@
+{
+"nginxVhost": {
+		"webroot" : "/usr/share/nginx/chef",
+		"servername" : "chef.opstree.com",
+		"conffile": "chef.opstree.com.conf"
+	},
+
+	"run_list": [
+		"recipe[nginxVhost]"
+	]
+
+}

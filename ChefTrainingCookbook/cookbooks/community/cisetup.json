@@ -1,0 +1,21 @@
+{
+	"java": {
+                "jdk_version": "7"
+
+	},
+  	"nginx": {
+			"default": {
+				"modules": [ "socketproxy" ]
+			},
+			"socketproxy":{
+				"apps":{
+					"default":{
+						"context_name": "Spring3HibernateApp",
+						"port":		"8080"
+					}
+				}
+			}
+	},
+
+  "run_list": [ "recipe[java]", "recipe[ciwrapper]", "recipe[nginx]" ]
+}

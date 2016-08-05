@@ -1,0 +1,101 @@
+#!/bin/bash
+create_container_html() {
+filename=$1
+path=$2
+echo "<html>" > $path
+echo "<head>" >> $path
+echo "<title>" >> $path
+echo "Server mappings info" >> $path
+echo "</title></head>" >> $path
+echo "<body>" >> $path
+echo "<table width='100%' border='2'>" >> $path
+echo "<tr>" >> $path
+echo "<th> Server name </th><th> SSH Port </th><th> VNC Port </th><th> Web Server Port </th><th> Build Status </th><th> Merge Status </th></tr>" >> $path
+while read -r line
+do
+	echo "<tr>" >> $path
+	echo "<td>" >> $path
+	name=$line
+	echo "$name" | cut -d " " -f1 >> $path
+	echo "</td>" >> $path
+	echo "<td>" >> $path
+        echo "$name" | cut -d " " -f2 >> $path
+        echo "</td>" >> $path
+	echo "<td>" >> $path
+        echo "$name" | cut -d " " -f3 >> $path
+        echo "</td>" >> $path
+	echo "<td>" >> $path
+        echo "$name" | cut -d " " -f4 >> $path
+        echo "</td>" >> $path
+	echo "<td>" >> $path
+	current_server=`echo "$name" | cut -d " " -f1`
+	current_branch=`echo ${current_server/_Server}`
+	if [ -f "/var/lib/jenkins/jobs/${current_branch}CodeQuality/buildstatus.txt" ]
+	then
+        	cat "/var/lib/jenkins/jobs/${current_branch}CodeQuality/buildstatus.txt" >> $path
+	else
+		touch "/var/lib/jenkins/jobs/${current_branch}CodeQuality/buildstatus.txt"
+		cat "/var/lib/jenkins/jobs/${current_branch}CodeQuality/buildstatus.txt" >> $path
+	fi
+        echo "</td>" >> $path
+	echo "<td>" >> $path
+	if [ -f "/var/lib/jenkins/jobs/${current_branch}CodeQuality/mergestatus.txt" ]
+        then
+                cat "/var/lib/jenkins/jobs/${current_branch}CodeQuality/mergestatus.txt" >> $path
+        else
+                touch "/var/lib/jenkins/jobs/${current_branch}CodeQuality/mergestatus.txt" 
+                cat "/var/lib/jenkins/jobs/${current_branch}CodeQuality/mergestatus.txt" >> $path
+        fi
+        echo "</td>" >> $path
+	echo "</tr>" >> $path
+	echo "<tr>" >> $path
+	echo "<td></td>" >> $path
+	echo "<td colspan=5>" >> $path
+	echo "<table width='100%' border='2'>" >> $path
+	echo "<tr><td>" >> $path
+	echo "${current_branch}UnitTest" >> $path
+	echo "</td>" >> $path
+	echo "<td>" >> $path
+	if [ -f "/var/lib/jenkins/jobs/${current_branch}UnitTest/buildstatus.txt" ]
+        then 
+                cat "/var/lib/jenkins/jobs/${current_branch}UnitTest/buildstatus.txt" >> $path
+        else
+                touch "/var/lib/jenkins/jobs/${current_branch}UnitTest/buildstatus.txt"
+                cat "/var/lib/jenkins/jobs/${current_branch}UnitTest/buildstatus.txt" >> $path
+        fi
+	echo "</td>" >> $path
+	echo "</tr>" >> $path
+	echo "<tr><td>" >> $path
+        echo "${current_branch}FunctionalTest" >> $path
+        echo "</td>" >> $path
+        echo "<td>" >> $path
+        if [ -f "/var/lib/jenkins/jobs/${current_branch}FunctionalTest/buildstatus.txt" ]
+        then 
+                cat "/var/lib/jenkins/jobs/${current_branch}FunctionalTest/buildstatus.txt" >> $path
+        else
+                touch "/var/lib/jenkins/jobs/${current_branch}FunctionalTest/buildstatus.txt"
+                cat "/var/lib/jenkins/jobs/${current_branch}FunctionalTest/buildstatus.txt" >> $path
+        fi
+        echo "</td>" >> $path
+        echo "</tr>" >> $path
+	echo "<tr><td>" >> $path
+        echo "${current_branch}StaticCodeAnalysis" >> $path
+        echo "</td>" >> $path
+        echo "<td>" >> $path
+        if [ -f "/var/lib/jenkins/jobs/${current_branch}StaticCodeAnalysis/buildstatus.txt" ]
+        then
+                cat "/var/lib/jenkins/jobs/${current_branch}StaticCodeAnalysis/buildstatus.txt" >> $path
+        else
+                touch "/var/lib/jenkins/jobs/${current_branch}StaticCodeAnalysis/buildstatus.txt"
+                cat "/var/lib/jenkins/jobs/${current_branch}StaticCodeAnalysis/buildstatus.txt" >> $path
+        fi
+        echo "</td>" >> $path
+        echo "</tr>" >> $path
+	echo "</table>" >> $path
+	echo "</td>" >> $path
+	echo "</tr>" >> $path
+done < "$filename"
+echo "</table>" >> $path
+echo "</body>" >> $path
+echo "</html>" >> $path
+}

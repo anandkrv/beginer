@@ -1,0 +1,11 @@
+EmployeeAutomation/target/*
+EmployeeAutomation/build/*
+EmployeeAutomation/.classpath
+EmployeeAutomation/.project
+EmployeeAutomation/.settings/*
+Spring3HibernateApp/target/*
+Spring3HibernateApp/build/*
+Spring3HibernateApp/.classpath
+Spring3HibernateApp/.project
+Spring3HibernateApp/.settings/*
+

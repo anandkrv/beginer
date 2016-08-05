@@ -1,0 +1,18 @@
+{
+  "LICENSE": "8c16666ae6c159876a0ba63099614381",
+  "README.markdown": "db59bbc871d397d5c714dd6def5c2d5b",
+  "manifests/client.pp": "212fbdc0d637dd7b36b3d627891b1c2c",
+  "manifests/command_hostperformance.pp": "dff2718e70c10f3d6006eb89075bc6cf",
+  "manifests/command_jolokia.pp": "bc2bf4be3623ccdbe5befcfc6ba7af0a",
+  "manifests/command_sendemail.pp": "e2ab5255ca47e68713c0397d813c4d25",
+  "manifests/command_serviceperformance.pp": "c653ec0734531ef4ea9b24f4cd804932",
+  "manifests/init.pp": "a0378f2e6bd8d297d876deddf050abf6",
+  "manifests/nrpe.pp": "8468a6e002c76e5703d23a328c48404f",
+  "manifests/plugin.pp": "50f54b25811ee6cbaa28c79e27e5043a",
+  "manifests/server.pp": "e4358a17ce78b9f695d935b5e59a8bd7",
+  "manifests/user.pp": "83b7fd1a6f43f5a9b03a9c9c92423a27",
+  "metadata.json": "29a7b80ccdae002482bec30d391d38fe",
+  "templates/command_notifyHostBySendEmail.erb": "9afdc1c0bcaf6efbfe16a27e9e6aa268",
+  "templates/command_notifyServiceBySendEmail.erb": "75a2832721d3ce992513b91f2c980b3b",
+  "templates/nagios.cfg.erb": "e3cf345c6f6e12cca50afca1d0898407"
+}

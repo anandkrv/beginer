@@ -1,0 +1,7 @@
+---
+# defaults file for puppet.sync
+
+hostname: "puppetnode2"
+server: "foreman.bigparser.com"
+certname: "prod-nexus.bigparser.com"
+Add_line: '"52.24.81.83 foreman.bigparser.com"'

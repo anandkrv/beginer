@@ -1,0 +1,8 @@
+1.) Create an image from docker public nginx image
+  - docker build -t nginx-proxy .
+2.) Run the container from this image
+  - docker run --name nginx-proxy -p 80:80 -d nginx-proxy
+3.) Verify if it ran fine
+  - docker inspect <container id> | grep IP
+  - curl  <ip of nginx-proxy container>
+4.) Docker file is also updating the default.conf by doing a proxy entry of tomcat, so make sure that you update conf/default.conf with the tomcat container ip

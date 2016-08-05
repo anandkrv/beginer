@@ -1,0 +1,13 @@
+---
+# defaults file for opstree.mongo
+backup_dir: "/opt/backup"
+buket_name: "redcrackle"
+aws_dir_name: "backupmongo"
+userName: "opstree"
+passWd: "opstree"
+mongo_database_name: "admin"
+mongo_collection_name: "people"
+password_less_login: false
+password_login: false
+backup_for_spaecfice_database: false
+backup_for_spaecfice_collection: true

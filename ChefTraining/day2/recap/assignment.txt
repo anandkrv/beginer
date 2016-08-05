@@ -1,0 +1,2 @@
+1.) Clone repository https://github.com/OpsTree/ChefTraining.git using chef
+2.) Download file https://s3-ap-southeast-1.amazonaws.com/xdevopstraining/Spring3HibernateApp.war on your local system in /tmp directory

@@ -1,0 +1,117 @@
+Host *
+    StrictHostKeyChecking no
+Host dev.nat.az.a.xebia.training.com
+  user 		ec2-user
+  HostName 	<NAT PUBLIC IP>
+  IdentityFile 	~/.ssh/terraform.pem 
+Host dev.logserver.az.a.xebia.training.com
+  User          root
+  HostName      dev.logserver.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host dev.mysql.az.a.xebia.training.com
+  User          root
+  HostName      dev.mysql.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host dev.app.az.a.xebia.training.com
+  User          root
+  HostName      dev.app.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host dev.jenkins.az.a.xebia.training.com
+  User          root
+  HostName      dev.jenkins.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host dev.proxy.az.a.xebia.training.com
+  User          root
+  HostName      dev.proxy.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+
+Host dev.nat.az.b.xebia.training.com
+  user    ec2-user
+  HostName  <NAT PUBLIC IP>
+  IdentityFile  ~/.ssh/terraform.pem 
+Host dev.puppet.az.b.xebia.training.com
+  User          ubuntu
+  HostName      dev.puppet.az.b.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.b.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host dev.app.az.b.xebia.training.ProxyCommand
+  User          root
+  HostName      dev.app.az.b.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host dev.zabbix.az.b.xebia.training.com
+  User          root
+  HostName      dev.zabbix.az.b.xebia.training.com
+  Port          22
+  ProxyCommand  ssh dev.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+
+############  qa  #########
+Host qa.nat.az.a.xebia.training.com
+  user    ec2-user
+  HostName  <NAT PUBLIC IP>
+  IdentityFile  ~/.ssh/terraform.pem 
+Host qa.mysql.az.a.xebia.training.com
+  User          root
+  HostName      qa.mysql.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh qa.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host qa.app.az.a.xebia.training.com
+  User          root
+  HostName      qa.app.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh qa.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+
+Host qa.nat.az.b.xebia.training.com
+  user    ec2-user
+  HostName  <NAT PUBLIC IP>
+  IdentityFile  ~/.ssh/terraform.pem 
+Host qa.app.az.b.xebia.training.com
+  User          root
+  HostName      qa.app.az.b.xebia.training.com
+  Port          22
+  ProxyCommand  ssh qa.nat.az.b.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+
+############  prod  #########
+Host prod.az.a.xebia.training.com
+  user    ec2-user
+  HostName  <NAT PUBLIC IP>
+  IdentityFile  ~/.ssh/terraform.pem 
+Host prod.mysql.az.a.xebia.training.com
+  User          root
+  HostName      prod.mysql.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh prod.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+Host prod.app.az.a.xebia.training.com
+  User          root
+  HostName      prod.app.az.a.xebia.training.com
+  Port          22
+  ProxyCommand  ssh prod.nat.az.a.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem
+
+Host prod.nat.az.b.xebia.training.com
+  user    ec2-user
+  HostName  <NAT PUBLIC IP>
+  IdentityFile  ~/.ssh/terraform.pem 
+Host prod.app.az.b.xebia.training.com
+  User          root
+  HostName      prod.app.az.b.xebia.training.com
+  Port          22
+  ProxyCommand  ssh prod.nat.az.b.xebia.training.com -W %h:%p
+  IdentityFile ~/.ssh/terraform.pem

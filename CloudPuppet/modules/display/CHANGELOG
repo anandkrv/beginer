@@ -1,0 +1,18 @@
+0.5.2 (2015-11-04)
+  * Update spec tests for Puppet 4
+  * Fix init script quoting of commands and output
+
+0.5.1 (2015-09-21)
+  * Improvements to integer validation (#2) @scarby
+
+0.5.0 (2015-03-25)
+  * Support custom arguments for starting x11vnc and xvfb
+  * Quote default integers, class name fixes @tayzlor
+  * Init script enhancements @darktim
+  * Update to tests
+
+0.4.0 (2014-12-16)
+  * Update documentation
+
+0.3.0
+  * Inherited module from @p0dje and initial refactoring

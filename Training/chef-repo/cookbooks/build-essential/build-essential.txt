@@ -1,0 +1,41 @@
+Cookbook:build-essential
+  This cookbook installs packages required for compiling C software from source. We use this cookbook if we wish to compile C programs, or 
+  install RubyGems with native extensions.
+
+1.Recipes:-
+  This cookbook contains various recipes according to platform. For example the debian recipe consists of the various packages that will be 
+  installed in the system such as 
+                 package 'autoconf'
+                 package 'binutils-doc'
+                 package 'bison'
+                 package 'build-essential'
+                 package 'flex'
+                 package 'gettext'
+                 package 'ncurses-dev'
+
+
+2.Attributes:-
+  default['build-essential']['compile_time'] - This attribute execute resources at compile time and the default is false
+ 
+
+Usage:-
+  a)By default the build essential will install all the recipes such as _debian,_fedora,_freebsd,_rhel etc. So if have know that our nodes are   
+    only let us suppose debian based and want only _debian recipe should be included in the chef-server then we have our metadata.json file like 
+    this.
+
+{
+  "name": "build-essential",
+  "version": "2.0.6",
+  "description": "Installs C compiler / build tools",
+   ...........
+   ...........
+ "platforms": {
+     "debian": ">= 0.0.0"
+}
+ "recipes": {
+    "build-essential": "_debian"
+  }
+}
+
+ b)if we want to add or remove some packages in the particular recipe then the only thing which we want to do is to remove or add the package 
+   from the recipe.

@@ -1,0 +1,19 @@
+---
+dependencies:
+  - { role: radamanth.mysql-ansible }
+
+galaxy_info:
+  author: alok
+  description: Ansible
+  company: "Opstree"
+  min_ansible_version: 1.9.4
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  categories:
+    - monitoring
+

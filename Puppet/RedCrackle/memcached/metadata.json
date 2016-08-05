@@ -1,0 +1,31 @@
+{
+  "name": "jbussdieker-memcached",
+  "version": "0.0.5",
+  "author": "Joshua Bussdieker",
+  "summary": "Puppet Memcached management module",
+  "license": "MIT",
+  "source": "http://github.com/jbussdieker/puppet-memcached",
+  "project_page": "http://github.com/jbussdieker/puppet-memcached",
+  "issues_url": "https://github.com/jbussdieker/puppet-memcached/issues",
+  "description": "This module can be used for basic Memcached Management",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "tags": [
+    "memcached"
+  ],
+  "dependencies": [
+  
+  ]
+}

@@ -1,0 +1,5 @@
+---
+# handlers file for alok.Icinga2
+- name: restart icinga
+  service: name=icinga2 state=restarted
+

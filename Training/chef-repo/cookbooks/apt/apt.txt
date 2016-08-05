@@ -1,0 +1,71 @@
+Cookbook:apt
+  This cookbook includes recipes to execute apt-get update to ensure the local APT package cache is up to date.
+1.Recipes:-
+   a)Default:-
+       i)This recipe installs the update-notifier-common package to provide the timestamp file used to only run apt-get update if the cache is 
+         more than one day old.
+       ii)This recipe should appear first in the run list of Debian or Ubuntu nodes to ensure that the package cache is up to date before    
+          managing any package resources with Chef.
+   
+   b)cacher-client:-
+       i)This recipe configures the node to use the apt-cacher-ng server as a client.
+       
+   c)cacher-ng:-
+       i)This recipe installs the apt-cacher-ng package and service so the system can provide caching functionality.
+
+2.Attributes:-
+   a)['apt']['cacher_ipaddress'] - used to assign an ip address of  a cacher server (or standard proxy server) not available via search.
+   b)['apt']['cacher_interface] - interface to connect to the cacher-ng service .
+   c)['apt']['cacher_port'] - port for the cacher-ng service (either client or server), default is '3142'
+   d)['apt']['cacher_dir'] - directory used by cacher-ng service, default is '/var/cache/apt-cacher-ng
+   e)['apt']['cacher-client']['restrict_environment'] - this attribute is used to restrict the  node to use the apt-cacher-ng server in our 
+      Environment, default is 'false'.
+   g)['apt']['compiletime'] - force the cacher-client recipe to run before other recipes. It forces apt to use the proxy before other recipes 
+      run. Useful if our nodes have limited access to public apt repositories. This is overridden if the cacher-ng recipe is in our run list.
+      Default is 'false'.
+   h)['apt']['cache_bypass'] - array of URLs to bypass the cache. Accepts the URL and protocol to fetch directly from the remote repository and 
+      not attempt to cache.
+
+Tweaking the metadata.json file according to our needs:--
+   First Scenario:- Let us suppose that our cache-server is located at 192.168.1.6 address and we are configuring the cacher-client node to use 
+                    the apt-get update cache of the cache-server.
+Here is what our metadata.json file will look like:-
+ "attributes": {
+    
+    "apt/cacher_port": {
+      "description": "Default listen port for the caching server",
+      "default": "3142"
+    },
+    "apt/cacher_interface": {
+      "description": "Default listen interface for the caching server",
+      "default": eth0
+    },
+    "apt/cacher_ipaddress": {
+      "description": "Assigning the ip address of the cacher-server i.e 192.168.1.6",
+      "default": "192.168.1.6"
+    },
+    "apt/caching_server": {
+      "description": "Set this to true if the node is a caching server",
+      "default": "false"
+    }
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "apt": "Runs apt-get update during compile phase and sets up preseed directories",
+    "apt::cacher-client": "Client for the apt::cacher-ng caching proxy"  
+}
+
+  Second Scenario:- Let us suppose we want to bypass the cache-server and connect directly to the repository oracle.com. To do this, you need to 
+                    override the cache_bypass attribute with an array of repositories like this:-
+                   
+
+{
+    'apt': {
+        'cache_bypass': {
+            'download.oracle.com': 'http'
+        }
+    }
+}
+
+                                                      

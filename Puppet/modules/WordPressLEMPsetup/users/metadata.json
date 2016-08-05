@@ -1,0 +1,32 @@
+{
+  "types": [
+
+  ],
+  "license": "Apache License, Version 2.0",
+  "version": "1.0.11",
+  "source": "UNKNOWN",
+  "description": "Instead of using a seperate resource type for every user, this allows a single class call which will use hiera to populate your users for you.",
+  "summary": "Manage users using hiera data.",
+  "checksums": {
+    "README.markdown": "fcdc739ac6abbb9fc68f0057dcf8db1a",
+    "manifests/setup.pp": "2110426a03433aa42301b4e7b4eb184b",
+    "spec/spec_helper.rb": "e2d6de6863608259afea1e4adc0fdf12",
+    "spec/spec.opts": "87c92e0bb6615f5f0b245ffe95dcca38",
+    "tests/init.pp": "89e657b54d4e943b8945c6f9b5f82b3e",
+    "manifests/init.pp": "b1a75993000d9d9d8b39bd91496f46d0",
+    "spec/defines/users_spec.rb": "9c7a346dc06d88297868f44bcd4a2e20",
+    "Rakefile": "f37e6131fe7de9a49b09d31596f5fbf1",
+    "Gemfile": "156fe3fd3e0077a60fe8cb04155a2c30",
+    "Modulefile": "0f216022c310dccde3802d0b57cb53b5",
+    "manifests/ssh_authorized_keys.pp": "f2c576e3bad4c676025e2fb678d2b519",
+    "Gemfile.lock": "e33060c403dc4ed90ea7c49f297b5107"
+  },
+  "author": "mthibaut",
+  "name": "mthibaut-users",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib"
+    }
+  ],
+  "project_page": "https://github.com/mthibaut/puppet-users"
+}

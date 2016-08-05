@@ -1,0 +1,9 @@
+
+1 >puppet module install elasticsearch-elasticsearch
+
+2 > echo 'deb http://packages.elasticsearch.org/elasticsearch/1.0/debian stable main' | sudo tee /etc/apt/sources.list.d/elasticsearch.list
+
+3 > wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch | apt-key add -
+ 
+4 > apt-get update 
+

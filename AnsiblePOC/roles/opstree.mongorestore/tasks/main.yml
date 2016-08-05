@@ -1,0 +1,18 @@
+---
+# tasks file for opstree.mongorestore
+
+- name: Restoring full database ...
+  command: mongorestore  {{ mongobackup_dir }}/{{ mongobackup_file }}
+  when: password_less_login
+
+- name: Restore full database when authorized with password ...
+  command: mongorestore --username {{ mongo_database_username }} --password {{ mongo_database_password }} {{ mongobackup_dir }}/{{ mongobackup_file }}
+  when: password_login
+
+- name: Restore a particular database ...
+  command: mongorestore --db {{ mongo_database_name }} {{ mongobackup_dir }}/{{ mongobackup_file }}/{{ mongo_database_name }}
+  when: restore_for_specific_database
+
+- name: Restore a particular collection of a database ...
+  command: mongorestore --collection {{ mongo_collection_name }} --db {{ mongo_database_name }} {{ mongobackup_dir }}/{{ mongobackup_file }}/{{ mongo_database_name }}/{{ mongo_collection_name }}.bson
+  when: restore_for_specific_collection

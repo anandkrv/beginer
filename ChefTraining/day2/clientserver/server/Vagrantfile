@@ -1,0 +1,36 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "centos7"
+  config.vm.box_url = "https://github.com/holms/vagrant-centos7-box/releases/download/7.1.1503.001/CentOS-7.1.1503-x86_64-netboot.box"
+  #config.vm.network "public_network", bridge:"wlan0"
+
+  config.vm.network "private_network", ip: "192.168.33.10"
+  # config.vm.hostname = "chef-server"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "4096"]
+  end
+  config.vm.synced_folder ".", "/data"
+
+  config.vm.provision "shell", inline: <<-SHELL
+    hostname chef-server
+    systemctl stop firewalld
+    yum -y install net-tools
+    sudo echo "127.0.0.1 chef-server chef-server" >> /etc/hosts
+    rpm -Uvh /data/chef-server-core-12.8.0-1.el6.x86_64.rpm
+    chef-server-ctl reconfigure
+    chef-server-ctl user-create sandy Sandeep Rawat sandeep@opstree.com 'sandy724' --filename /data/sandy.pem
+    chef-server-ctl org-create opstree 'Opstree Solutions' --association_user sandy --filename /data/opstree-validator.pem
+
+    chef-server-ctl install chef-manage
+    chef-server-ctl reconfigure
+    chef-manage-ctl reconfigure --accept-license
+
+
+    # chef-server-ctl install opscode-reporting
+    # chef-server-ctl reconfigure
+    # opscode-reporting-ctl reconfigure
+  SHELL
+end

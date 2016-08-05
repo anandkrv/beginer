@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Sandeep
+  description: Ansible role to install aws-cli and creates credential file in .aws directory 
+  company: Opstree
+  license: MIT
+  min_ansible_version: 1.9
+  categories:
+  - aws_cli
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - trusty
+    - vivid
+dependencies: []

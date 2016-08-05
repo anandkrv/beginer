@@ -1,0 +1,16 @@
+1.) Jenkins Installation: As a web app or as a service
+2.) How to create basic Jenkins Jobs
+3.) Jenkins Plugins
+4.) Managing Build Jobs : View plugins, List plugins
+5.) Integration with Version Control Systems : Git
+6.) Authentication & Authorization
+7.) Parametrized Builds
+8.) Adding email capability to builds
+9.) Exploring Build Actions
+10.) Exploring Post build actions
+11.) Upstream and Downstream jobs
+12.) How to map a utility sciprt bash/python to Jenkins job
+13.) Code Quality Job in jenkins
+14.) Code Stability Job in jenkins
+15.) Deployment Job in jenkins
+16.) Exploration of Plugins

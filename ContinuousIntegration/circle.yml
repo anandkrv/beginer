@@ -1,0 +1,38 @@
+## Customize the test machine
+machine:
+
+  timezone:
+    Asia/Kolkata # Set the timezone
+
+  # Override /etc/hosts
+  hosts:
+    circlehost: 127.0.0.1
+    dev.opstree.com: 127.0.0.1
+
+  # Add some environment variables
+  environment:
+    CIRCLE_ENV: test
+    DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+
+## Customize checkout
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init # use submodules
+
+## Customize dependencies
+dependencies:
+  pre:
+    - apt-get install maven # install from a different package manager
+
+  # we automatically cache and restore many dependencies between
+  # builds. If you need to, you can add custom paths to cache:
+  cache_directories:
+    - "custom_1"   # relative to the build directory
+    - "~/custom_2" # relative to the user's home directory
+
+
+## Customize deployment commands
+deployment:
+  staging:
+    branch: circleci

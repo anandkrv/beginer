@@ -1,0 +1,32 @@
+[MYSQLD]
+user = mysql
+default_storage_engine = <%= @default_storage_engine %>                 
+basedir = /usr
+datadir = <%= @datadir %>
+<% if @osfamily == 'RedHat' %>socket = /var/lib/mysql/mysql.sock<% else %>socket = /var/run/mysqld/mysqld.sock<% end %>
+port = 3306
+innodb_autoinc_lock_mode = 2
+log_queries_not_using_indexes = 1
+max_allowed_packet = <%= @max_allowed_packet %>
+binlog_format = <%= @binlog_format %>
+wsrep_provider = <%= @wsrep_provider %>
+wsrep_node_address = <%= @wsrep_node_address %>
+wsrep_cluster_name = <%= @wsrep_cluster_name %>
+wsrep_cluster_address = <%= @wsrep_cluster_address %>
+wsrep_node_name = <%= @wsrep_node_name %>
+wsrep_slave_threads = <%=  @wsrep_slave_threads %>
+wsrep_sst_method = <%= @wsrep_sst_method %>
+wsrep_sst_auth = <%= @wsrep_sst_auth %>
+
+[sst] #This section is for sst(state snapshot transfer) configuration
+streamfmt = xbstream
+
+[xtrabackup] #This section is defines tuning configuration for xtrabackup
+compress
+compact
+parallel = 2
+compress_threads = 2
+rebuild_threads = 2
+
+[mysqld_safe]
+log-error = /var/log/mysqld.log

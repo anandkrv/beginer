@@ -1,0 +1,21 @@
+{
+	"nginx": {
+		"vhost": {
+			"vhost1": {
+				"webroot": "/usr/share/nginx/mysite",
+				"servername": "blog.xebia.com",
+				"conffile": "blog.xebia.com.conf"
+			},
+			"vhost2": {
+				"webroot": "/usr/share/nginx/mysite1",
+				"servername": "blog1.xebia.com",
+				"conffile": "blog1.xebia.com.conf"
+			}
+		}
+	},
+
+	"run_list": [
+		"recipe[nginxcentos::virtualhost]"
+	]
+
+}

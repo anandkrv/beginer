@@ -1,0 +1,13 @@
+{
+  "Modulefile": "959b24e97adf21d1f77b1e15466aeb48",
+  "README.md": "bbaa445ea2ecf64a0b18868d9ec50d91",
+  "lib/puppet/provider/incron/parsed.rb": "2380d839418791c5b861a1dc10b04088",
+  "lib/puppet/provider/incron_allowuser/parsed.rb": "cb5ac3892c869ecc2fd6dc99b6b0eb89",
+  "lib/puppet/provider/incron_denyuser/parsed.rb": "20c529d4a7d2d16baf65a5cd824bc8b8",
+  "lib/puppet/type/incron.rb": "ec03245418f246f8d0da9029a2310af9",
+  "lib/puppet/type/incron_allowuser.rb": "9a47e8a188d8d7d2a63229f59852c0db",
+  "lib/puppet/type/incron_denyuser.rb": "541b39f04ed00b5c259e056da15b69a1",
+  "manifests/init.pp": "2cf233afbc8d286b9226a7c102d38f05",
+  "spec/spec_helper.rb": "a55d1e6483344f8ec6963fcb2c220372",
+  "tests/init.pp": "f920c078051969e77c54b1fd55b5c713"
+}

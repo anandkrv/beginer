@@ -1,0 +1,54 @@
+---
+#install and configure mybb setup
+
+- name: Install EPEL repo.
+  yum:
+    name: "{{ epel_repo_url }}"
+    state: present
+
+- name: Import EPEL GPG key.
+  rpm_key:
+    key: "{{ epel_repo_gpg_key_url }}"
+    state: present
+
+- name: Install php5/nginx packages ...
+  yum: name={{item}} state=installed
+  with_items:
+  - epel-release
+  - php-mysql
+  - nginx
+  - php-fpm
+  - unzip
+
+- name: Create root directory ...
+  file: path={{ nginx_root_path }} state=directory
+
+- name: Download Mybb package ...
+  get_url: url=http://resources.mybb.com/downloads/mybb_{{ mybb_version }}.zip dest=/tmp
+
+- name: Unzip mybb package ... 
+  unarchive: src=/tmp/mybb_{{ mybb_version }}.zip dest={{ nginx_root_path }} copy=no
+
+- name: Move Uplaod directory ...
+  command: mv {{ nginx_root_path}}/Upload/ {{ nginx_root_path }}/mybb creates={{ nginx_root_path }}/mybb
+
+- name: Configure nginx defaults ...
+  template: src=default.redhat dest=/etc/nginx/conf.d/default.conf
+
+- name: Move config.php file  ...
+  command: cp {{ nginx_root_path }}/mybb/inc/config.default.php {{ nginx_root_path }}/mybb/inc/config.php
+
+- name: Configure nginx.conf defaults ...
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: Configure www.conf defaults ...
+  template: src=www.conf dest=/etc/php-fpm.d/www.conf
+
+- name: Change directory ownership  ...
+  command: chown -R nginx:nginx {{ nginx_root_path }}/mybb
+
+- name: Restart the nginx service ...
+  service: name=nginx state=restarted
+
+- name: Restart the Php-fpm service ...
+  service: name=php-fpm state=restarted

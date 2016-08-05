@@ -1,0 +1,16 @@
+---
+# tasks file for opstree.awscli
+
+- name: Installing pip ...
+  apt: pkg=python-pip state=installed
+
+- name: Installing aws cli ...
+  pip: name=awscli state=present
+
+- name: Creating aws directory ...
+  file: path={{ AWS_HOME }}/.aws state=directory
+  sudo: yes
+
+- name: Creating aws config file
+  sudo: yes
+  template: src=aws_credentials dest={{ AWS_HOME }}/.aws/credentials mode=0640

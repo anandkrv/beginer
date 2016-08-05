@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0          http://maven
+.apache.org/xsd/settings-1.0.0.xsd">
+  <mirrors>
+<%- @mirrors.each do |mirror| -%>
+    <mirror>
+      <id><%= mirror['id'] %></id>
+      <name><%= mirror['name'] %></name>
+      <url><%= mirror['url'] %></url>
+      <mirrorOf><%= mirror['mirror_of'] %></mirrorOf>
+    </mirror>
+<%- end -%>
+  </mirrors>
+  <profiles>
+<%- @profiles.each do |profile| -%>
+    <profile>
+      <id><%= profile['id'] %></id>
+      <activation>
+        <activeByDefault><%- if profile['active_by_default'] -%>true<%- else -%>false<%- end -%></activeByDefault>
+      </activation>
+      <properties>
+<%- profile['properties'].each do |property| -%>
+        <<%= property['key'] %>><%= property['value'] %></<%= property['key'] %>>
+<%- end -%>
+      </properties>
+      <repositories>
+<%- profile['repositories'].each do |repository| -%>
+        <repository>
+          <id><%= repository['id'] %></id>
+          <url><%= repository['url'] %></url>
+          <layout><%= repository['layout'] %></layout>
+          <releases>
+            <enabled><%= repository['releases'] %></enabled>
+          </releases>
+          <snapshots>
+            <enabled><%= repository['snapshots'] %></enabled>
+          </snapshots>
+        </repository>
+<%- end -%>
+      </repositories>
+      <pluginRepositories>
+<%- profile['plugin_repositories'].each do |plugin_repo| -%>
+        <pluginRepository>
+          <id><%= plugin_repo['id'] %></id>
+          <url><%= plugin_repo['url'] %></url>
+          <layout><%= plugin_repo['layout'] %></layout>
+          <releases>
+            <enabled><%= plugin_repo['releases'] %></enabled>
+          </releases>
+          <snapshots>
+            <enabled><%= plugin_repo['snapshots'] %></enabled>
+          </snapshots>
+        </pluginRepository>
+<%- end -%>
+      </pluginRepositories>
+    </profile>
+<%- end -%>
+  </profiles>
+  <servers>
+<%- @servers.each do |server| -%>
+    <server>
+      <id><%= server['id'] %></id>
+      <username><%= server['username'] %></username>
+      <password><%= server['password'] %></password>
+    </server>
+<%- end -%>
+  </servers>
+</settings>

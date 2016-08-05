@@ -1,0 +1,1 @@
+puppet module install example42-nfs

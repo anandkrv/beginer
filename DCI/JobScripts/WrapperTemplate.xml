@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<com.tikal.jenkins.plugins.multijob.MultiJobProject plugin="jenkins-multijob-plugin@1.16">
+  <actions/>
+  <description>I&apos;m the {feature_branch} branch wrapper job for all jobs of this branch</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.1">
+      <useBuildBlocker>true</useBuildBlocker>
+      <blockLevel>UNDEFINED</blockLevel>
+      <scanQueueFor>DISABLED</scanQueueFor>
+      <blockingJobs>{feature_branch}MultiJob</blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.4.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>git@github.com:mulesoft-web/ProgrammableWeb</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/{feature_branch}</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.SCMTrigger>
+      <spec>H/2 * * * *</spec>
+      <ignorePostCommitHooks>false</ignorePostCommitHooks>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+source /var/lib/jenkins/JobScripts/util_functions.sh
+source /var/lib/jenkins/JobScripts/create_container_html.sh
+source /var/lib/jenkins/JobScripts/git_functions.sh
+source /var/lib/jenkins/JobScripts/docker_functions_new.sh
+source /var/lib/jenkins/JobScripts/git_functions_new.sh
+
+HOST_SSH_PORT=4940
+
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;rm -rf /usr/share/nginx/www/ProgrammableWeb&quot;
+
+echo &quot;Copying code.&quot;;
+copy_git_project {SERVER_IP} ${HOST_SSH_PORT} ${WORKSPACE}
+
+echo &quot;Linking to files and settings already present on the container.&quot;;
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;ln -s /data/files /usr/share/nginx/www/ProgrammableWeb/sites/default/files&quot;;
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;chown -R www-data /usr/share/nginx/www/ProgrammableWeb/sites/default/files&quot;;
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;ln -s /data/settings.php /usr/share/nginx/www/ProgrammableWeb/sites/default/settings.php&quot;;
+
+change_settings {SERVER_IP} ${HOST_SSH_PORT} 
+
+copy_setting_files {SERVER_IP} ${HOST_SSH_PORT} ${JENKINS_HOME}
+
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;service php5-fpm restart&quot;
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;service nginx restart&quot;
+
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;cd /usr/share/nginx/www/ProgrammableWeb/sites &amp;&amp; drush cc all&quot;
+
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;cd /usr/share/nginx/www/ProgrammableWeb/tests &amp;&amp; rm -rf vendor&quot;
+
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;cd /usr/share/nginx/www/ProgrammableWeb/tests &amp;&amp; php composer.phar self-update&quot;
+
+ssh root@{SERVER_IP} -p ${HOST_SSH_PORT} &quot;cd /usr/share/nginx/www/ProgrammableWeb/tests &amp;&amp; php composer.phar update&quot;
+
+get_committers_email {feature_branch} ${BUILD_ID}
+
+echo &quot;SSH=${HOST_SSH_PORT}&quot; &gt; /var/lib/jenkins/jobs/prodMultiJob/env.properties
+
+server_ip={SERVER_IP}
+
+git_last_commit  ${WORKSPACE} ${BRANCH_NAME}
+
+compare_commit_id</command>
+    </hudson.tasks.Shell>
+    <com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
+      <phaseName>First level Code Checks</phaseName>
+      <phaseJobs>
+        <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+          <jobName>{feature_branch}UnitTest</jobName>
+          <currParams>true</currParams>
+          <exposedSCM>false</exposedSCM>
+          <disableJob>false</disableJob>
+          <parsingRulesPath></parsingRulesPath>
+          <maxRetries>0</maxRetries>
+          <enableRetryStrategy>false</enableRetryStrategy>
+          <enableCondition>false</enableCondition>
+          <abortAllJob>false</abortAllJob>
+          <condition></condition>
+          <configs class="empty-list"/>
+          <killPhaseOnJobResultCondition>NEVER</killPhaseOnJobResultCondition>
+          <buildOnlyIfSCMChanges>false</buildOnlyIfSCMChanges>
+        </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+        <com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+          <jobName>{feature_branch}StaticCodeAnalysis</jobName>
+          <currParams>true</currParams>
+          <exposedSCM>false</exposedSCM>
+          <disableJob>false</disableJob>
+          <parsingRulesPath></parsingRulesPath>
+          <maxRetries>0</maxRetries>
+          <enableRetryStrategy>false</enableRetryStrategy>
+          <enableCondition>false</enableCondition>
+          <abortAllJob>false</abortAllJob>
+          <condition></condition>
+          <configs class="empty-list"/>
+          <killPhaseOnJobResultCondition>NEVER</killPhaseOnJobResultCondition>
+          <buildOnlyIfSCMChanges>false</buildOnlyIfSCMChanges>
+        </com.tikal.jenkins.plugins.multijob.PhaseJobsConfig>
+      </phaseJobs>
+      <continuationCondition>ALWAYS</continuationCondition>
+    </com.tikal.jenkins.plugins.multijob.MultiJobBuilder>
+  </builders>
+  <publishers>
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.28">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+          <configs>
+            <hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+              <properties>server_ip={SERVER_IP}</properties>
+            </hudson.plugins.parameterizedtrigger.PredefinedBuildParameters>
+          </configs>
+          <projects>Delete_server</projects>
+          <condition>UNSTABLE</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.BuildTrigger>
+  </publishers>
+  <buildWrappers/>
+</com.tikal.jenkins.plugins.multijob.MultiJobProject>

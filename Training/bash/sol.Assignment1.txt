@@ -1,0 +1,10 @@
+BIGNORE=.zip:.iso:*.log
+rm -v *
+unset GLOBIGNORE
+
+jenkin script
+
+#!/bin/bash
+ssh vagrant@192.168.33.2 sudo ./file.sh
+
+

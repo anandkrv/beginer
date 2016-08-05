@@ -1,0 +1,13 @@
+{
+  "CONTRIBUTING.md": "5854753d59ebbb2b1e7c6c85c4637de7",
+  "Gemfile": "0dd2809140fd1ae2cdf7a88d7c62b00f",
+  "LICENSE": "2d9c14720c9adef6ab3197a70adb690c",
+  "README.md": "d2535d4bb3ab868bbd4acf3236114265",
+  "Rakefile": "e00d9816c6b0c7b2903d6d3249f81d0c",
+  "manifests/init.pp": "e282303255862c9b1defbcf3b01f9178",
+  "metadata.json": "bb672cc5f28d419a64b2cfad8ddc6103",
+  "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+  "spec/spec_helper.rb": "0db89c9a486df193c0e40095422e19dc",
+  "templates/default_locales.erb": "bd12e51ad186e319b269bd6c34326845",
+  "tests/init.pp": "1b3a14454150f5e241af0e65930b374a"
+}

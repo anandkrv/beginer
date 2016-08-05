@@ -1,0 +1,8 @@
+1. Create a cookbook using which we can create user, while invoking that cookbook we can pass user name
+2. Modify above cookbook to delete user
+3. Create a cookbook to setup a system, it may involve
+  a.) Installing required softwares
+  b.) Checking out latest code
+  c.) Setting up timezone of system
+  d.) Other things that you can think of i.e migrating a software from one version to another one
+The idea behind above cookbook is to streamline new people on-boarding purpose or to enable quick transition to another project

@@ -1,0 +1,9 @@
+my-tom:
+  build: /root/git/Docker/vagrant/ubuntu/docker_linking/tomcat/.
+  
+nginx:
+  build: /root/git/Docker/vagrant/ubuntu/docker_linking/nginx/.
+  ports:
+   - "80:80"
+  links:
+   - my-tom

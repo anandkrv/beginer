@@ -1,0 +1,28 @@
+---
+# tasks file for opstree.mongo
+
+- name: Creates backup directory ...
+  file: path={{ backup_dir }} state=directory
+
+- name: mongo backup ...
+  command: mongodump --out {{ backup_dir }}
+  when: password_less_login
+
+- name: mongo backup ...
+  command: mongodump --username {{ userName }} --password {{ passWd }} --out {{ backup_dir }}
+  when: password_login
+
+- name: mongo backup ..
+  command: mongodump --username {{ userName }} --db {{ mongo_database_name }} --password {{ passWd }} --out {{ backup_dir }}
+  when: backup_for_spaecfice_database
+
+- name: mongo backup ..
+  command: mongodump --username {{ userName }} --password {{ passWd }} --collection {{ mongo_collection_name }} --db {{ mongo_database_name }} --out {{ backup_dir }}
+  when: backup_for_spaecfice_collection
+
+- name: mongo backup.zip
+  command: tar -cvf {{ backup_dir }}/{{ ansible_hostname }}-{{ ansible_date_time.date }}-backup.tar.gz {{ backup_dir }}
+  
+- name: upload in s3 bucket ...
+  command: aws s3 cp {{ backup_dir }}/{{ ansible_hostname }}-{{ ansible_date_time.date }}-backup.tar.gz s3://{{ buket_name }}
+

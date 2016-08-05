@@ -1,0 +1,9 @@
+/var/log/logstash/logstash.log {
+	daily
+	missingok
+	rotate 7
+	compress
+	copytruncate
+	notifempty
+	create 664 root root
+}

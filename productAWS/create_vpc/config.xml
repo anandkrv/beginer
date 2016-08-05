@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>VPC_NAME</name>
+          <description></description>
+          <defaultValue>PROD-VPC</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>NUMBER_OF_IP</name>
+          <description></description>
+          <defaultValue></defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>REGION</name>
+          <description></description>
+          <defaultValue>ap-southeast-1</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+source ${JENKINS_HOME}/scripts/util_functions.sh
+source ${JENKINS_HOME}/vpc/createstack.sh
+
+cidrRange=`cidrRangeCal ${NUMBER_OF_IP}`
+cidr=&quot;10.0.0.0/${cidrRange}&quot;
+echo ${cidr}
+echo &quot;${VPC_NAME}-stack ${VPC_NAME} ${cidr} ${REGION}&quot;
+
+createStack &quot;${VPC_NAME}-stack&quot; &quot;${VPC_NAME}&quot; &quot;${cidr}&quot; &quot;${REGION}&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

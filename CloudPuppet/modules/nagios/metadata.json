@@ -1,0 +1,38 @@
+{
+  "name": "ceh-nagios",
+  "version": "1.2.0",
+  "author": "Centre for Ecology & Hydrology",
+  "summary": "Allows you to create an instance of nagios and then monitor nodes which have exported resources in your puppetdb",
+  "license": "GPL-2.0",
+  "source": "https://github.com/NERC-CEH/puppet-nagios",
+  "project_page": "https://forge.puppetlabs.com/ceh/nagios",
+  "issues_url": "https://github.com/NERC-CEH/puppet-nagios/issues",
+  "tags": [
+    "nagios",
+    "monitoring"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "12.04",
+        "14.04"
+      ]
+    },
+    {
+      "operatingsystem": "Mac OS X",
+      "operatingsystemrelease": [
+        "Yosemite"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6"
+      ]
+    }
+  ],
+  "dependencies": [
+    {"name":"puppetlabs/concat","version_requirement":">=1.1.2 <2.0.0"}
+  ]
+}
